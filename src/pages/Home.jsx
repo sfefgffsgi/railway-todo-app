@@ -125,8 +125,13 @@ export const Home = () => {
 // 表示するタスク
 const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
+  const today = new Date();
+  let dateLimit;
+  let diff = 0
+  let dLeft = 0
+  let hLeft = 0
+  let mLeft = 0
   if (tasks === null) return <></>;
-
   if (isDoneDisplay == "done") {
     return (
       <ul>
@@ -134,18 +139,23 @@ const Tasks = (props) => {
           .filter((task) => {
             return task.done === true;
           })
-          .map((task, key) => (
-            <li key={key} className="task-item">
-              <Link
-                to={`/lists/${selectListId}/tasks/${task.id}`}
-                className="task-item-link"
-              >
-                {task.title}
-                <br />
-                {task.done ? "完了" : "未完了"}
-              </Link>
-            </li>
-          ))}
+          .map((task, key) => {
+            dateLimit = new Date(task.limit);
+            return(
+              <li key={key} className="task-item">
+                <Link
+                  to={`/lists/${selectListId}/tasks/${task.id}`}
+                  className="task-item-link"
+                >
+                  {task.title}
+                  <br />
+                  {task.done ? "完了" : "未完了"}
+                  <br />
+                  {dateLimit.toLocaleString()}
+                </Link>
+              </li>
+            )
+          })}
       </ul>
     );
   }
@@ -156,18 +166,38 @@ const Tasks = (props) => {
         .filter((task) => {
           return task.done === false;
         })
-        .map((task, key) => (
-          <li key={key} className="task-item">
-            <Link
-              to={`/lists/${selectListId}/tasks/${task.id}`}
-              className="task-item-link"
-            >
-              {task.title}
-              <br />
-              {task.done ? "完了" : "未完了"}
-            </Link>
-          </li>
-        ))}
+        .map((task, key) => {
+          dateLimit = new Date(task.limit);
+          diff = dateLimit.getTime() - today.getTime();
+
+          dLeft = Math.floor(diff / (24 * 60 * 60 * 1000));
+          diff = diff % (24 * 60 * 60 * 1000);
+          
+          hLeft = Math.floor(diff / (60 * 60 * 1000));
+          diff = diff % (60 * 60 * 1000);
+
+          mLeft = Math.floor(diff / (60 * 1000));
+
+          return(
+            <li key={key} className="task-item">
+              <Link
+                to={`/lists/${selectListId}/tasks/${task.id}`}
+                className="task-item-link"
+              >
+                {task.title}
+                <br />
+                {task.done ? "完了" : "未完了"}
+                <br />
+                {dateLimit.toLocaleString()}
+                {task.done ? "" : 
+                  "（残り日時: "
+                    + dLeft + "日"
+                    + hLeft + "時"
+                    + mLeft + "分）"}
+              </Link>
+            </li>
+          )
+        })}
     </ul>
   );
 };
