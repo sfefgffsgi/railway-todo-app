@@ -82,13 +82,16 @@ export const Home = () => {
               </p>
             </div>
           </div>
-          <ul className="list-tab">
+          <ul className="list-tab" role="menu">
             {lists.map((list, key) => {
               const isActive = list.id === selectListId;
               return (
                 <li
+                  role="menuitem"
+                  tabindex={key}
                   key={key}
                   className={`list-tab-item ${isActive ? "active" : ""}`}
+                  aria-selected={isActive}
                   onClick={() => handleSelectList(list.id)}
                 >
                   {list.title}
@@ -134,7 +137,7 @@ const Tasks = (props) => {
   if (tasks === null) return <></>;
   if (isDoneDisplay == "done") {
     return (
-      <ul>
+      <ul role="navigation">
         {tasks
           .filter((task) => {
             return task.done === true;
