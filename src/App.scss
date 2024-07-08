@@ -1,21 +1,21 @@
 @media screen and (max-width: 768px) {
-	/* 768px以下に適用されるCSS（タブレット用） */
-    .taskList{
-        width: 100% !important;
-    }
+  /* 768px以下に適用されるCSS（タブレット用） */
+  .taskList {
+    width: 100% !important;
+  }
 }
 @media screen and (max-width: 480px) {
-	/* 320px以下に適用されるCSS（スマホ用） */
-    .taskList{
-        width: 100% !important;
-    }
-    .list-tab{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        height: 5rem;
-    }
-    .list-tab-item{
-        width: auto !important;
-    }
+  /* 320px以下に適用されるCSS（スマホ用） */
+  .taskList {
+    width: 100% !important;
+  }
+  .list-tab {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 5rem;
+  }
+  .list-tab-item {
+    width: auto !important;
+  }
 }

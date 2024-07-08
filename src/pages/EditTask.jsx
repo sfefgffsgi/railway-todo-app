@@ -71,7 +71,7 @@ export const EditTask = () => {
         setTitle(task.title);
         setDetail(task.detail);
         setIsDone(task.done);
-        setLimit(dateLimit.toISOString().split('.')[0]);
+        setLimit(dateLimit.toISOString().split(".")[0]);
       })
       .catch((err) => {
         setErrorMessage(`タスク情報の取得に失敗しました。${err}`);

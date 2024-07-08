@@ -65,7 +65,7 @@ export const Home = () => {
   };
 
   const handleKeyDownList = (e, id) => {
-    if (e.key != ' ' && e.key != 'Enter'){
+    if (e.key != " " && e.key != "Enter") {
       return;
     }
     handleSelectList(id);
@@ -139,10 +139,10 @@ const Tasks = (props) => {
   const { tasks, selectListId, isDoneDisplay } = props;
   const today = new Date();
   let dateLimit;
-  let diff = 0
-  let dLeft = 0
-  let hLeft = 0
-  let mLeft = 0
+  let diff = 0;
+  let dLeft = 0;
+  let hLeft = 0;
+  let mLeft = 0;
   if (tasks === null) return <></>;
   if (isDoneDisplay == "done") {
     return (
@@ -153,7 +153,7 @@ const Tasks = (props) => {
           })
           .map((task, key) => {
             dateLimit = new Date(task.limit);
-            return(
+            return (
               <li key={key} className="task-item">
                 <Link
                   to={`/lists/${selectListId}/tasks/${task.id}`}
@@ -166,7 +166,7 @@ const Tasks = (props) => {
                   {dateLimit.toLocaleString()}
                 </Link>
               </li>
-            )
+            );
           })}
       </ul>
     );
@@ -184,13 +184,13 @@ const Tasks = (props) => {
 
           dLeft = Math.floor(diff / (24 * 60 * 60 * 1000));
           diff = diff % (24 * 60 * 60 * 1000);
-          
+
           hLeft = Math.floor(diff / (60 * 60 * 1000));
           diff = diff % (60 * 60 * 1000);
 
           mLeft = Math.floor(diff / (60 * 1000));
 
-          return(
+          return (
             <li key={key} className="task-item">
               <Link
                 to={`/lists/${selectListId}/tasks/${task.id}`}
@@ -201,14 +201,12 @@ const Tasks = (props) => {
                 {task.done ? "完了" : "未完了"}
                 <br />
                 {dateLimit.toLocaleString()}
-                {task.done ? "" : 
-                  "（残り: "
-                  + dLeft + "日"
-                  + hLeft + "時"
-                  + mLeft + "分）"}
+                {task.done
+                  ? ""
+                  : "（残り: " + dLeft + "日" + hLeft + "時" + mLeft + "分）"}
               </Link>
             </li>
-          )
+          );
         })}
     </ul>
   );
