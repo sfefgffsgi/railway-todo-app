@@ -63,6 +63,14 @@ export const Home = () => {
         setErrorMessage(`タスクの取得に失敗しました。${err}`);
       });
   };
+
+  const handleKeyDownList = (e, id) => {
+    if (e.key != ' ' && e.key != 'Enter'){
+      return;
+    }
+    handleSelectList(id);
+  };
+
   return (
     <div>
       <Header />
@@ -82,17 +90,18 @@ export const Home = () => {
               </p>
             </div>
           </div>
-          <ul className="list-tab" role="menu">
+          <ul className="list-tab" role="list">
             {lists.map((list, key) => {
               const isActive = list.id === selectListId;
               return (
                 <li
-                  role="menuitem"
-                  tabindex={key}
+                  role="listitem"
+                  tabIndex={key + 1}
                   key={key}
                   className={`list-tab-item ${isActive ? "active" : ""}`}
                   aria-selected={isActive}
                   onClick={() => handleSelectList(list.id)}
+                  onKeyDown={(e) => handleKeyDownList(e, list.id)}
                 >
                   {list.title}
                 </li>
@@ -164,7 +173,7 @@ const Tasks = (props) => {
   }
 
   return (
-    <ul>
+    <ul role="navigation">
       {tasks
         .filter((task) => {
           return task.done === false;
@@ -193,10 +202,10 @@ const Tasks = (props) => {
                 <br />
                 {dateLimit.toLocaleString()}
                 {task.done ? "" : 
-                  "（残り日時: "
-                    + dLeft + "日"
-                    + hLeft + "時"
-                    + mLeft + "分）"}
+                  "（残り: "
+                  + dLeft + "日"
+                  + hLeft + "時"
+                  + mLeft + "分）"}
               </Link>
             </li>
           )
