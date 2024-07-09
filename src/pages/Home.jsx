@@ -143,6 +143,8 @@ const Tasks = (props) => {
   let dLeft = 0;
   let hLeft = 0;
   let mLeft = 0;
+  const hoursToAdd = new Date().getTimezoneOffset() / 60;
+
   if (tasks === null) return <></>;
   if (isDoneDisplay == "done") {
     return (
@@ -153,6 +155,7 @@ const Tasks = (props) => {
           })
           .map((task, key) => {
             dateLimit = new Date(task.limit);
+            dateLimit.setHours(dateLimit.getHours() + hoursToAdd);
             return (
               <li key={key} className="task-item">
                 <Link
@@ -163,7 +166,7 @@ const Tasks = (props) => {
                   <br />
                   {task.done ? "完了" : "未完了"}
                   <br />
-                  {dateLimit.toLocaleString()}
+                  {dateLimit.toLocaleString({ timeZone: "Asia/Tokyo" })}
                 </Link>
               </li>
             );
@@ -180,6 +183,7 @@ const Tasks = (props) => {
         })
         .map((task, key) => {
           dateLimit = new Date(task.limit);
+          dateLimit.setHours(dateLimit.getHours() + hoursToAdd);
           diff = dateLimit.getTime() - today.getTime();
 
           dLeft = Math.floor(diff / (24 * 60 * 60 * 1000));

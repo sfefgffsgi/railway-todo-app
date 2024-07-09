@@ -24,9 +24,9 @@ export default [
           jsx: true,
         },
       },
-      // globals: {
-      //   ...globals.browser,
-      // },
+      globals: {
+        ...globals.jest,
+      },
     },
     rules: {
       // ... any rules you want
@@ -36,6 +36,9 @@ export default [
       "react/prop-types": "off"
      },
     // ... others are omitted for brevity
+    // env: {
+    //   "jest/globals": true
+    // }
   },
 
 ];

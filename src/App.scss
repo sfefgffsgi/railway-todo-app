@@ -5,9 +5,21 @@
   }
 }
 @media screen and (max-width: 480px) {
-  /* 320px以下に適用されるCSS（スマホ用） */
+  /* 48px以下に適用されるCSS（スマホ用） */
+  // #root{
+  //   max-width: 320px;
+  // }
+  #root {
+    overflow-x: hidden;
+  }
   .taskList {
     width: 100% !important;
+    margin: 50px 10px !important;
+    max-width: 320px;
+  }
+  .task-item {
+    width: 100% !important;
+    font-size: medium !important;
   }
   .list-tab {
     width: 100%;
